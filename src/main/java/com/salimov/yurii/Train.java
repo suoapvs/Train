@@ -8,11 +8,13 @@ class Train {
 
     private final static Random RANDOM = new Random();
     private final int length;
-    private List<Wagon> wagons;
+    private final List<Wagon> wagons;
+    private int currentWagonNumber;
     private boolean isReady;
 
     public Train(final int length) {
         this.length = length > 0 ? length : 0;
+        wagons = new ArrayList<>();
         this.isReady = false;
     }
 
@@ -21,33 +23,55 @@ class Train {
     }
 
     public List<Wagon> getWagons() {
-        checkTrain(this);
+        if (!isReady) {
+            addRandomWagons(wagons, length);
+            isReady = true;
+        }
         return this.wagons;
     }
 
-    public Wagon getWagon(
-            final int number
-    ) {
-        return getWagons().get(number);
-    }
-
-    private static void checkTrain(final Train train) {
-        if (!train.isReady) {
-            train.wagons = createTrain(train.length);
-            train.isReady = true;
+    public Wagon getWagon(final int number) {
+        if (number >= length) {
+            this.currentWagonNumber = number - length;
+        } else if (number < 0) {
+            this.currentWagonNumber = number + length;
+        } else {
+            this.currentWagonNumber = number;
         }
+        return getWagons().get(this.currentWagonNumber);
     }
 
-    private static List<Wagon> createTrain(int length) {
-        List<Wagon> wagons = new ArrayList<>();
+    public Wagon getCurrentWagon() {
+        return getWagon(this.currentWagonNumber);
+    }
+
+    public Wagon getNextWagon() {
+        return getWagon(this.currentWagonNumber + 1);
+    }
+
+    public Wagon getPrevWagon() {
+        return getWagon(this.currentWagonNumber - 1);
+    }
+
+    private static List<Wagon> addRandomWagons(
+            final List<Wagon> wagons,
+            final int length
+    ) {
         for (int i = 0; i < length; i++) {
             wagons.add(
-                    new Wagon(
-                            i,
-                            RANDOM.nextBoolean()
-                    )
+                    getRandomWagon(i)
             );
         }
         return wagons;
+    }
+
+
+    private static Wagon getRandomWagon(int number) {
+        return new Wagon(
+                number,
+                new Lamp(
+                        RANDOM.nextBoolean()
+                )
+        );
     }
 }

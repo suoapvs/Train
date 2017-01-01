@@ -2,15 +2,19 @@ package com.salimov.yurii;
 
 public class Wagon {
 
-    private boolean state;
     private int number;
+    private Lamp lamp;
 
     public Wagon(
             final int number,
-            final boolean state
+            final Lamp lamp
     ) {
         this.number = number;
-        this.state = state;
+        this.lamp = lamp;
+    }
+
+    public Wagon(final int number) {
+        this(number, new Lamp());
     }
 
     public int getNumber() {
@@ -21,15 +25,19 @@ public class Wagon {
         this.number = number;
     }
 
-    public boolean getState() {
-        return this.state;
+    public boolean getLampState() {
+        return this.lamp.getState();
     }
 
-    public void setState(boolean state) {
-        this.state = state;
+    public boolean onLamp() {
+        return this.lamp.on();
     }
 
-    public boolean reversState() {
-        return (this.state = !this.state);
+    public boolean offLamp() {
+        return this.lamp.off();
+    }
+
+    public boolean turnLamp() {
+        return getLampState() ? offLamp() : onLamp();
     }
 }

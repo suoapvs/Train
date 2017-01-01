@@ -30,30 +30,30 @@ public class TrainLength {
     }
 
     private void calculateLength() {
-        this.train.getWagon(
-                this.startWagonNumber
-        ).setState(true);
-        int number = this.startWagonNumber;
-        while (true) {
-            int plus = 0;
-            int temp = number + 1 < train.getLength() ? number + 1 : 0;
-            while (
-                    !train.getWagon(temp)
-                            .getState()
-                    ) {
-                plus++;
-                temp = temp + 1 < train.getLength() ? temp + 1 : 0;
-            }
-            train.getWagon(temp)
-                    .setState(false);
-            if (
-                    !train.getWagon(number)
-                            .getState()
-                    ) {
-                number = plus + 1;
+        this.train.getWagon(this.startWagonNumber).onLamp();
+        boolean direction = true;
+        while(true) {
+            final int length = getLengthInDirection(direction);
+            this.train.getCurrentWagon().offLamp();
+            if(!this.train.getWagon(this.startWagonNumber).getLampState()) {
+                this.length = length;
                 break;
             }
+            direction = !direction;
         }
-        this.length = number;
+    }
+
+    private int getLengthInDirection(final boolean toRight) {
+        int length = 1;
+        if (toRight) {
+            while (!this.train.getNextWagon().getLampState()) {
+                length++;
+            }
+        } else {
+            while (!this.train.getPrevWagon().getLampState()) {
+                length++;
+            }
+        }
+        return length;
     }
 }
