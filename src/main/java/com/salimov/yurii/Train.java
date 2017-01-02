@@ -14,7 +14,7 @@ class Train {
 
     public Train(final int length) {
         this.length = length > 0 ? length : 0;
-        wagons = new ArrayList<>();
+        this.wagons = new ArrayList<>();
         this.isReady = false;
     }
 
@@ -23,18 +23,18 @@ class Train {
     }
 
     public List<Wagon> getWagons() {
-        if (!isReady) {
-            addRandomWagons(wagons, length);
-            isReady = true;
+        if (!this.isReady) {
+            addRandomWagons(this.wagons, this.length);
+            this.isReady = true;
         }
         return this.wagons;
     }
 
     public Wagon getWagon(final int number) {
-        if (number >= length) {
-            this.currentWagonNumber = number - length;
+        if (number >= this.length) {
+            this.currentWagonNumber = number - this.length;
         } else if (number < 0) {
-            this.currentWagonNumber = number + length;
+            this.currentWagonNumber = number + this.length;
         } else {
             this.currentWagonNumber = number;
         }

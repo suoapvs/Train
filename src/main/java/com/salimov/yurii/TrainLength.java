@@ -3,19 +3,11 @@ package com.salimov.yurii;
 public class TrainLength {
 
     private final Train train;
-    private final int startWagonNumber;
     private int length;
-
-    public TrainLength(
-            final Train train,
-            final int startWagonNumber
-    ) {
-        this.train = train;
-        this.startWagonNumber = startWagonNumber;
-    }
+    private boolean direction;
 
     public TrainLength(final Train train) {
-        this(train, 0);
+        this.train = train;
     }
 
     public Train getTrain() {
@@ -23,37 +15,55 @@ public class TrainLength {
     }
 
     public int getLength() {
-        if (this.train != null && this.length == 0) {
+        if ((this.train != null) && (this.length == 0)) {
             calculateLength();
         }
         return this.length;
     }
 
     private void calculateLength() {
-        this.train.getWagon(this.startWagonNumber).onLamp();
-        boolean direction = true;
-        while(true) {
-            final int length = getLengthInDirection(direction);
+        Wagon startWagon = this.train.getWagon(0);
+        startWagon.onLamp();
+        while (true) {
+            getLengthInDirection();
             this.train.getCurrentWagon().offLamp();
-            if(!this.train.getWagon(this.startWagonNumber).getLampState()) {
-                this.length = length;
+            startWagon = moveToStartWagon();
+            if (!startWagon.getLampState()) {
                 break;
             }
-            direction = !direction;
+            this.direction = !this.direction;
         }
     }
 
-    private int getLengthInDirection(final boolean toRight) {
-        int length = 1;
-        if (toRight) {
+    private int getLengthInDirection() {
+        this.length = 1;
+        if (this.direction) {
             while (!this.train.getNextWagon().getLampState()) {
-                length++;
+                this.length++;
             }
         } else {
             while (!this.train.getPrevWagon().getLampState()) {
-                length++;
+                this.length++;
             }
         }
-        return length;
+        return this.length;
+    }
+
+    private Wagon moveToStartWagon() {
+        Wagon wagon = null;
+        if (this.length > 0) {
+            if (this.direction) {
+                for (int i = 0; i < this.length; i++) {
+                    wagon = this.train.getPrevWagon();
+                }
+            } else {
+                for (int i = 0; i < this.length; i++) {
+                    wagon = this.train.getNextWagon();
+                }
+            }
+        } else {
+            wagon = this.train.getCurrentWagon();
+        }
+        return wagon;
     }
 }
