@@ -1,7 +1,19 @@
 package com.salimov.yurii;
 
+/**
+ * The main class of the app.
+ *
+ * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
+ * @version 1.0
+ * @see Train
+ */
 public final class Main {
 
+    /**
+     * The main method.
+     *
+     * @param args a input arguments.
+     */
     public static void main(String[] args) {
         System.out.println("--- Train Length ---");
         final Train train = new Train(
@@ -14,6 +26,12 @@ public final class Main {
         );
     }
 
+    /**
+     * Prints a result of the application work in the console.
+     *
+     * @param realLength       a real train length.
+     * @param calculatedLength a calculated train length.
+     */
     private static void printResult(
             final int realLength,
             final int calculatedLength
