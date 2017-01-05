@@ -1,12 +1,12 @@
 package com.salimov.yurii;
 
-public class TrainLength {
+public final class CalculateLength {
 
     private final Train train;
     private int length;
     private boolean direction;
 
-    public TrainLength(final Train train) {
+    public CalculateLength(final Train train) {
         this.train = train;
     }
 
@@ -14,18 +14,18 @@ public class TrainLength {
         return this.train;
     }
 
-    public int getLength() {
+    public int get() {
         if ((this.train != null) && (this.length == 0)) {
-            calculateLength();
+            calculate();
         }
         return this.length;
     }
 
-    private void calculateLength() {
+    private void calculate() {
         Wagon startWagon = this.train.getWagon(0);
         startWagon.onLamp();
         while (true) {
-            getLengthInDirection();
+            getInDirection();
             this.train.getCurrentWagon().offLamp();
             startWagon = moveToStartWagon();
             if (!startWagon.getLampState()) {
@@ -35,7 +35,7 @@ public class TrainLength {
         }
     }
 
-    private int getLengthInDirection() {
+    private int getInDirection() {
         this.length = 1;
         if (this.direction) {
             while (!this.train.getNextWagon().getLampState()) {
