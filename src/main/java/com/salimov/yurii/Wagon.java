@@ -1,6 +1,6 @@
 package com.salimov.yurii;
 
-public class Wagon {
+public final class Wagon {
 
     private int number;
     private Lamp lamp;

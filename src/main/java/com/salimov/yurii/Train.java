@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class Train {
+public final class Train {
 
     private final static Random RANDOM = new Random();
     private final int length;
@@ -14,7 +14,7 @@ class Train {
 
     public Train(final int length) {
         this.length = length > 0 ? length : 0;
-        this.wagons = new ArrayList<>();
+        this.wagons = new ArrayList<>(length);
         this.isReady = false;
     }
 

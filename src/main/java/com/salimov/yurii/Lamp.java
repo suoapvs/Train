@@ -1,11 +1,10 @@
 package com.salimov.yurii;
 
-public class Lamp {
+public final class Lamp {
 
     private boolean state;
 
     public Lamp() {
-
     }
 
     public Lamp(final boolean state) {
