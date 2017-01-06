@@ -157,18 +157,15 @@ public final class Train implements ITrain {
      * @param number a value to check.
      */
     private void checkNumber(final int number) {
-        int temp = number;
         if (number >= this.length) {
-            do {
-                temp -= this.length;
-            } while (temp >= this.length);
+            this.currentWagonNumber = number - this.length * (number / this.length);
         } else if (number < 0) {
-            do {
-                temp += this.length;
-            } while (temp < 0);
+            this.currentWagonNumber = number + this.length * (-number / this.length + 1);
         } else {
-            temp = number;
+            this.currentWagonNumber = number;
         }
-        this.currentWagonNumber = temp;
+        if (this.currentWagonNumber >= this.length) {
+            this.currentWagonNumber -= this.length * (this.currentWagonNumber / this.length);
+        }
     }
 }
