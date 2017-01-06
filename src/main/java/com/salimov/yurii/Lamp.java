@@ -5,8 +5,9 @@ package com.salimov.yurii;
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
+ * @see ILamp
  */
-public final class Lamp {
+public final class Lamp implements ILamp {
 
     /**
      * The lamp state.
@@ -37,6 +38,7 @@ public final class Lamp {
      * @return {@code true} if lamp is turned on,
      * {@code false} otherwise.
      */
+    @Override
     public boolean getState() {
         return this.state;
     }
@@ -46,6 +48,7 @@ public final class Lamp {
      *
      * @return The lamp state.
      */
+    @Override
     public boolean on() {
         return (this.state = true);
     }
@@ -55,6 +58,7 @@ public final class Lamp {
      *
      * @return The lamp state.
      */
+    @Override
     public boolean off() {
         return (this.state = false);
     }
