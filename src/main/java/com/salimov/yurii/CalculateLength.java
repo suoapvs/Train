@@ -2,20 +2,20 @@ package com.salimov.yurii;
 
 /**
  * The class describes a method for
- * calculating the length of a train .
+ * calculating the length of a train.
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
- * @see Train
+ * @see ITrain
  */
-public final class CalculateLength {
+public final class CalculateLength implements ICalculateLength {
 
     /**
      * The train.
      *
-     * @see Train
+     * @see ITrain
      */
-    private final Train train;
+    private final ITrain train;
 
     /**
      * The calculated train length.
@@ -33,9 +33,9 @@ public final class CalculateLength {
      * Constructor.
      *
      * @param train a train.
-     * @see Train
+     * @see ITrain
      */
-    public CalculateLength(final Train train) {
+    public CalculateLength(final ITrain train) {
         this.train = train;
     }
 
@@ -43,9 +43,10 @@ public final class CalculateLength {
      * Returns a train.
      *
      * @return The train.
-     * @see Train
+     * @see ITrain
      */
-    public Train getTrain() {
+    @Override
+    public ITrain getTrain() {
         return this.train;
     }
 
@@ -54,7 +55,8 @@ public final class CalculateLength {
      *
      * @return The train length.
      */
-    public int get() {
+    @Override
+    public int getLength() {
         if ((this.train != null) && (this.length == 0)) {
             calculate();
         }
@@ -65,7 +67,7 @@ public final class CalculateLength {
      * Calculates the length of the train.
      */
     private void calculate() {
-        Wagon startWagon = this.train.getWagon(0);
+        IWagon startWagon = this.train.getWagon(0);
         startWagon.onLamp();
         while (true) {
             getInDirection();
@@ -101,10 +103,10 @@ public final class CalculateLength {
      * Moves to start wagon.
      *
      * @return The start wagon.
-     * @see Wagon
+     * @see IWagon
      */
-    private Wagon moveToStartWagon() {
-        Wagon wagon = null;
+    private IWagon moveToStartWagon() {
+        IWagon wagon = null;
         if (this.length > 0) {
             if (this.direction) {
                 for (int i = 0; i < this.length; i++) {
