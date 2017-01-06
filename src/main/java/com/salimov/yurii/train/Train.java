@@ -36,7 +36,7 @@ public final class Train implements ITrain {
     private int currentWagonNumber;
 
     /**
-     * The value, if the train ready for use.
+     * The value, if the train is ready for use.
      */
     private boolean isReady;
 
