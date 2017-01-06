@@ -30,7 +30,7 @@ public final class Wagon implements IWagon {
             final int number,
             final ILamp lamp
     ) {
-        this.number = number;
+        this.number = number > 0 ? number : 0;
         this.lamp = lamp;
     }
 

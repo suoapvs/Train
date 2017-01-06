@@ -50,6 +50,9 @@ public final class ScanLength implements IScanLength {
                     );
                 }
             }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            length = 0;
         }
         return length;
     }

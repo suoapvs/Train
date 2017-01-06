@@ -47,7 +47,7 @@ public final class Train implements ITrain {
      */
     public Train(final int length) {
         this.length = length > 0 ? length : 0;
-        this.wagons = new ArrayList<>(length);
+        this.wagons = new ArrayList<>(this.length);
     }
 
     /**
@@ -82,13 +82,7 @@ public final class Train implements ITrain {
      */
     @Override
     public IWagon getWagon(final int number) {
-        if (number >= this.length) {
-            this.currentWagonNumber = number - this.length;
-        } else if (number < 0) {
-            this.currentWagonNumber = number + this.length;
-        } else {
-            this.currentWagonNumber = number;
-        }
+        checkNumber(number);
         return getWagons().get(this.currentWagonNumber);
     }
 
@@ -154,5 +148,27 @@ public final class Train implements ITrain {
                         RANDOM.nextBoolean()
                 )
         );
+    }
+
+    /**
+     * Checks input wagon number.
+     * Corrects it and set to currentWagonNumber.
+     *
+     * @param number a value to check.
+     */
+    private void checkNumber(final int number) {
+        int temp = number;
+        if (number >= this.length) {
+            do {
+                temp -= this.length;
+            } while (temp >= this.length);
+        } else if (number < 0) {
+            do {
+                temp += this.length;
+            } while (temp < 0);
+        } else {
+            temp = number;
+        }
+        this.currentWagonNumber = temp;
     }
 }
