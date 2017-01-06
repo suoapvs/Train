@@ -1,4 +1,4 @@
-package com.salimov.yurii;
+package com.salimov.yurii.train;
 
 /**
  * The class describes the lamp entity.
@@ -17,7 +17,7 @@ public final class Lamp implements ILamp {
     private boolean state;
 
     /**
-     * Constructor.
+     * Default constructor.
      */
     public Lamp() {
     }

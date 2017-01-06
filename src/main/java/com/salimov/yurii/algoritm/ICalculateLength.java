@@ -1,4 +1,6 @@
-package com.salimov.yurii;
+package com.salimov.yurii.algoritm;
+
+import com.salimov.yurii.train.ITrain;
 
 /**
  * The interface describes a method for

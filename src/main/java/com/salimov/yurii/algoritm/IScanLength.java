@@ -1,4 +1,4 @@
-package com.salimov.yurii;
+package com.salimov.yurii.algoritm;
 
 /**
  * The interface describes a method for scanning

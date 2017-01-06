@@ -1,4 +1,4 @@
-package com.salimov.yurii;
+package com.salimov.yurii.train;
 
 /**
  * The class describes the wagon entity.
@@ -60,7 +60,7 @@ public final class Wagon implements IWagon {
      */
     @Override
     public void setNumber(final int number) {
-        this.number = number;
+        this.number = number > 0 ? number : 0;
     }
 
     /**

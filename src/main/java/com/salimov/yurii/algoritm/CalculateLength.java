@@ -1,4 +1,7 @@
-package com.salimov.yurii;
+package com.salimov.yurii.algoritm;
+
+import com.salimov.yurii.train.ITrain;
+import com.salimov.yurii.train.IWagon;
 
 /**
  * The class describes a method for

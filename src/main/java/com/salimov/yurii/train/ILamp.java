@@ -1,4 +1,4 @@
-package com.salimov.yurii;
+package com.salimov.yurii.train;
 
 /**
  * The interface describes the methods for working with lamp.

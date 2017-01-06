@@ -1,4 +1,4 @@
-package com.salimov.yurii;
+package com.salimov.yurii.algoritm;
 
 import java.io.InputStream;
 import java.util.Scanner;

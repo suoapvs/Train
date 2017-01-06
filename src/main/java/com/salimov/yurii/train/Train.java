@@ -1,4 +1,4 @@
-package com.salimov.yurii;
+package com.salimov.yurii.train;
 
 import java.util.ArrayList;
 import java.util.List;
