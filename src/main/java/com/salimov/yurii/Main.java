@@ -16,13 +16,12 @@ public final class Main {
      */
     public static void main(String[] args) {
         System.out.println("--- Train Length ---");
-        final Train train = new Train(
-                ScanLength.scan()
-        );
-        final CalculateLength calculateLength = new CalculateLength(train);
+        final IScanLength scanLength = new ScanLength(System.in);
+        final ITrain train = new Train(scanLength.scan());
+        final ICalculateLength calculateLength = new CalculateLength(train);
         printResult(
                 train.getLength(),
-                calculateLength.get()
+                calculateLength.getLength()
         );
     }
 
