@@ -5,9 +5,10 @@ package com.salimov.yurii;
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
- * @see Lamp
+ * @see IWagon
+ * @see ILamp
  */
-public final class Wagon {
+public final class Wagon implements IWagon {
 
     /**
      * The wagon number.
@@ -17,7 +18,7 @@ public final class Wagon {
     /**
      * The wagon lamp.
      */
-    private Lamp lamp;
+    private ILamp lamp;
 
     /**
      * Constructor.
@@ -27,7 +28,7 @@ public final class Wagon {
      */
     public Wagon(
             final int number,
-            final Lamp lamp
+            final ILamp lamp
     ) {
         this.number = number;
         this.lamp = lamp;
@@ -47,6 +48,7 @@ public final class Wagon {
      *
      * @return The wagon number.
      */
+    @Override
     public int getNumber() {
         return this.number;
     }
@@ -56,6 +58,7 @@ public final class Wagon {
      *
      * @param number a wagon number.
      */
+    @Override
     public void setNumber(final int number) {
         this.number = number;
     }
@@ -65,6 +68,7 @@ public final class Wagon {
      *
      * @return The wagon lamp state.
      */
+    @Override
     public boolean getLampState() {
         return this.lamp.getState();
     }
@@ -74,6 +78,7 @@ public final class Wagon {
      *
      * @return The lamp state.
      */
+    @Override
     public boolean onLamp() {
         return this.lamp.on();
     }
@@ -83,6 +88,7 @@ public final class Wagon {
      *
      * @return The lamp state.
      */
+    @Override
     public boolean offLamp() {
         return this.lamp.off();
     }
@@ -92,6 +98,7 @@ public final class Wagon {
      *
      * @return The lamp state.
      */
+    @Override
     public boolean turnLamp() {
         return getLampState() ? offLamp() : onLamp();
     }
