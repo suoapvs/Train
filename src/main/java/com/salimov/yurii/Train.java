@@ -9,9 +9,10 @@ import java.util.Random;
  *
  * @author Yurii Salimov (yurii.alex.salimov@gmail.com)
  * @version 1.0
- * @see Wagon
+ * @see ITrain
+ * @see IWagon
  */
-public final class Train {
+public final class Train implements ITrain {
 
     /**
      * The object of Random class is used to generate
@@ -27,7 +28,7 @@ public final class Train {
     /**
      * The list of train wagons.
      */
-    private final List<Wagon> wagons;
+    private final List<IWagon> wagons;
 
     /**
      * The number of current wagon.
@@ -54,6 +55,7 @@ public final class Train {
      *
      * @return The train length.
      */
+    @Override
     public int getLength() {
         return this.length;
     }
@@ -63,7 +65,8 @@ public final class Train {
      *
      * @return The list of train wagons.
      */
-    public List<Wagon> getWagons() {
+    @Override
+    public List<IWagon> getWagons() {
         if (!this.isReady) {
             addRandomWagons(this.wagons, this.length);
             this.isReady = true;
@@ -77,7 +80,8 @@ public final class Train {
      * @param number a wagon number.
      * @return The wagon.
      */
-    public Wagon getWagon(final int number) {
+    @Override
+    public IWagon getWagon(final int number) {
         if (number >= this.length) {
             this.currentWagonNumber = number - this.length;
         } else if (number < 0) {
@@ -93,7 +97,8 @@ public final class Train {
      *
      * @return The current wagon.
      */
-    public Wagon getCurrentWagon() {
+    @Override
+    public IWagon getCurrentWagon() {
         return getWagon(this.currentWagonNumber);
     }
 
@@ -102,7 +107,8 @@ public final class Train {
      *
      * @return The next wagon.
      */
-    public Wagon getNextWagon() {
+    @Override
+    public IWagon getNextWagon() {
         return getWagon(this.currentWagonNumber + 1);
     }
 
@@ -111,7 +117,8 @@ public final class Train {
      *
      * @return The previous wagon.
      */
-    public Wagon getPreviousWagon() {
+    @Override
+    public IWagon getPreviousWagon() {
         return getWagon(this.currentWagonNumber - 1);
     }
 
@@ -122,8 +129,8 @@ public final class Train {
      * @param length a train length (number of wagons).
      * @return The list of train wagons with random lamp state.
      */
-    private static List<Wagon> addRandomWagons(
-            final List<Wagon> wagons,
+    private static List<IWagon> addRandomWagons(
+            final List<IWagon> wagons,
             final int length
     ) {
         for (int i = 0; i < length; i++) {
@@ -140,7 +147,7 @@ public final class Train {
      * @param number a wagon number.
      * @return The wagon with random lamp state.
      */
-    private static Wagon getRandomWagon(int number) {
+    private static IWagon getRandomWagon(int number) {
         return new Wagon(
                 number,
                 new Lamp(
